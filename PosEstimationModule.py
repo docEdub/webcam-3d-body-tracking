@@ -74,15 +74,16 @@ class poseDetector():
 
 def main():
     detector = poseDetector()
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(1)
     while True:
         success, img = cap.read()
-        img = detector.findPose(img)
-        lmList = detector.getPosition(img)
-        # print(lmList)
-        detector.showFps(img)
-        cv2.imshow("Image", img)
-        cv2.waitKey(1)
+        if success:
+            img = detector.findPose(img)
+            lmList = detector.getPosition(img)
+            # print(lmList)
+            detector.showFps(img)
+            cv2.imshow("Image", img)
+            cv2.waitKey(1)
 
 
 if __name__ == "__main__":
