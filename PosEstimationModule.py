@@ -31,6 +31,11 @@ class poseDetector():
     def getPosition(self, img):
         self.lmList = []
         if self.results.pose_landmarks:
+            print("right_wrist xyz = [ ",
+                  self.results.pose_landmarks.landmark[mp.solutions.pose.PoseLandmark.RIGHT_WRIST].x,
+                  self.results.pose_landmarks.landmark[mp.solutions.pose.PoseLandmark.RIGHT_WRIST].y,
+                  self.results.pose_landmarks.landmark[mp.solutions.pose.PoseLandmark.RIGHT_WRIST].z,
+                  " ]")
             for id, lm in enumerate(self.results.pose_landmarks.landmark):
                 h, w, c = img.shape
                 cx, cy = int(lm.x * w), int(lm.y * h)
@@ -39,7 +44,7 @@ class poseDetector():
 
     def showFps(self, img):
         cTime = time.time()
-        print(cTime, self.pTime)
+        # print(cTime, self.pTime)
         fbs = 1 / (cTime - self.pTime)
         self.pTime = cTime
         cv2.putText(img, str(int(fbs)), (70, 80), cv2.FONT_HERSHEY_PLAIN, 3,
